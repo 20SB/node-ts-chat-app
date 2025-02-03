@@ -6,7 +6,7 @@ const app = express();
 app.use(cors({ origin: '*' }));
 app.use(express.json());
 
-// app.use('/', router);
+app.use('/', router);
 
 const port = process.env.PORT || 3000;
 app.listen(port,()=>{
