@@ -6,8 +6,8 @@ import { hash } from "../../config/bcrypt";
 export default class User {
   static getUserByEmail = async (email: string) => {
     try {
-      const userData = await postgresdb.select({}).from(users).where(eq(users.email, email));
-      if (userData.length) return userData[0];
+      const userData = await postgresdb.query.users.findFirst({where: eq(users.email, email)});
+      if (userData) return userData;
       else return null;
     } catch (error: any) {
       throw new Error(`Error getting user by email: ${error.message}`);
