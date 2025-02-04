@@ -1,0 +1,28 @@
+import { eq } from "drizzle-orm";
+import postgresdb from "../../config/db";
+import { users } from "../../models/schema";
+import { hash } from "../../config/bcrypt";
+
+export default class User {
+  static getUserByEmail = async (email: string) => {
+    try {
+      const userData = await postgresdb.select({}).from(users).where(eq(users.email, email));
+      if (userData.length) return userData[0];
+      else return null;
+    } catch (error: any) {
+      throw new Error(`Error getting user by email: ${error.message}`);
+    }
+  };
+
+  static createUser = async (name: string, email: string, password: string) => {
+    try {
+      const user = await postgresdb
+        .insert(users)
+        .values({ name, email, password: await hash(password) })
+        .returning({ id: users.userId, name: users.name, email: users.email });
+      return user[0];
+    } catch (error: any) {
+      throw new Error(`Error creating user: ${error.message}`);
+    }
+  };
+}

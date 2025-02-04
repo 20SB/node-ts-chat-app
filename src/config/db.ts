@@ -3,14 +3,15 @@ import { Client } from "pg";
 import * as schema from "../models/schema";
 
 // export const client = new Client({
-//   host: process.env.host,
-//   user: process.env.user,
-//   password: process.env.password,
-//   database: process.env.database,
-//   port: process.env.port,
-//   ssl: process.env.ssl,
+//   host: process.env.HOST,
+//   user: process.env.DBUSER,
+//   password: process.env.PASSWORD,
+//   database: process.env.DATABASE,
+//   port: 5432,
+//   ssl: false,
 // });
 
+console.log("Postgress URL : ", process.env.PG_URL);
 export let client = new Client(process.env.PG_URL);
 
 client
