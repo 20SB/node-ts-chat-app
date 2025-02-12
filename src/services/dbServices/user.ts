@@ -19,7 +19,7 @@ export default class User {
       const user = await postgresdb
         .insert(users)
         .values({ name, email, password: await hash(password) })
-        .returning({ id: users.userId, name: users.name, email: users.email });
+        .returning({ userId: users.userId, name: users.name, email: users.email });
       return user[0];
     } catch (error: any) {
       throw new Error(`Error creating user: ${error.message}`);

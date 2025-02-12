@@ -1,6 +1,6 @@
 {
-  "id": "db42933b-c5db-42a4-939a-9a8afb9389ab",
-  "prevId": "00000000-0000-0000-0000-000000000000",
+  "id": "1c836980-ba85-4b1f-8970-7aeecc33265b",
+  "prevId": "db42933b-c5db-42a4-939a-9a8afb9389ab",
   "version": "7",
   "dialect": "postgresql",
   "tables": {
@@ -149,6 +149,12 @@
           "primaryKey": false,
           "notNull": false
         },
+        "latest_message": {
+          "name": "latest_message",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": false
+        },
         "created_at": {
           "name": "created_at",
           "type": "timestamp",
@@ -179,6 +185,19 @@
           "tableTo": "messages",
           "columnsFrom": [
             "pinned_message"
+          ],
+          "columnsTo": [
+            "message_id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "chats_latest_message_messages_message_id_fk": {
+          "name": "chats_latest_message_messages_message_id_fk",
+          "tableFrom": "chats",
+          "tableTo": "messages",
+          "columnsFrom": [
+            "latest_message"
           ],
           "columnsTo": [
             "message_id"

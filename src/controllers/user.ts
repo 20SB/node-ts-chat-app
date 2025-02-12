@@ -10,7 +10,8 @@ export default class UserController {
       const existingUser = await dbServices.User.getUserByEmail(email);
       if (existingUser) throw new Error("User already exists");
       const newUser = await dbServices.User.createUser(name, email, password);
-      res.status(201).send({ message: "User created successfully", newUser });
+      const token = generateToken({ userId: newUser.userId });
+      res.status(201).send({ message: "User created successfully", user: newUser, token });
     } catch (error: any) {
       res.status(500).send({ message: `Error creating user: ${error.message}` });
     }

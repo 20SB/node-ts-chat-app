@@ -1,5 +1,7 @@
 import User from "./user";
+import Chat from "./chat"
 
 export default{
-    User
+    User,
+    Chat
 }

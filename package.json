@@ -8,6 +8,7 @@
     "start": "node dist/app.js",
     "migration:generate": "drizzle-kit generate",
     "migration:push": "node -r esbuild-register src/config/migrate.ts",
+    "migration:drop": "drizzle-kit drop",
     "drizzle:studio": "npx drizzle-kit studio"
   },
   "keywords": [],
